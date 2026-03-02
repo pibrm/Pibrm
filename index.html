@@ -1,112 +1,495 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pibrm</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="shortcut icon" href="favCon.png">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Discipular — Documento Oficial 1.0</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --muted:#a9b6d3;
+      --text:#eaf0ff;
+      --brand:#6ee7ff;
+      --brand2:#a78bfa;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:24px;
+      --max: 960px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,231,255,.20), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(167,139,250,.18), transparent 52%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 44px}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .wrap{padding:12px 16px}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 8px 18px rgba(110,231,255,.16);
+      position:relative;
+    }
+    .logo:after{
+      content:""; position:absolute; inset:9px;
+      border-radius:10px; border:2px solid rgba(255,255,255,.40);
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+    .hero{padding:22px 0 8px}
+    h1{margin:0 0 10px; font-size:28px; line-height:1.15}
+    .sub{color:var(--muted); margin:0 0 16px; font-size:14.5px}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:14px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn.primary{
+      border-color: rgba(110,231,255,.28);
+      background: linear-gradient(135deg, rgba(110,231,255,.20), rgba(167,139,250,.16));
+    }
+    .btn:active{transform: translateY(1px)}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .kicker{
+      font-size:12px; color:var(--muted);
+      text-transform:uppercase; letter-spacing:.12em;
+    }
+    h2{margin:6px 0 0; font-size:18px; line-height:1.2}
+    .card .bd{padding:0 14px 14px}
+    .list{margin:10px 0 0; padding:0 0 0 18px; color:var(--text)}
+    .list li{margin:6px 0; color:var(--text)}
+    .muted{color:var(--muted)}details{
+  border-top:1px solid var(--line);
+}
+summary{
+  list-style:none;
+  cursor:pointer;
+  padding:12px 14px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  user-select:none;
+}
+summary::-webkit-details-marker{display:none}
+.chev{
+  width:18px; height:18px; flex:0 0 auto;
+  border-radius:7px;
+  background: rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  display:grid; place-items:center;
+}
+.chev svg{transition: transform .18s ease}
+details[open] .chev svg{transform: rotate(180deg)}
+
+.twoCol{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px;
+  padding:10px 12px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+.dot{
+  width:10px; height:10px; border-radius:50%;
+  background: var(--brand);
+  box-shadow: 0 0 0 6px rgba(110,231,255,.10);
+}
+
+.footer{
+  margin-top:18px;
+  padding:16px 16px 22px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12.5px;
+}
+
+@media (min-width: 720px){
+  h1{font-size:34px}
+  .grid{grid-template-columns: 1fr 1fr}
+  .span2{grid-column: span 2}
+  .twoCol{grid-template-columns: 1fr 1fr}
+}
+
+/* imprimir */
+@media print{
+  .topbar, .ctaRow{display:none}
+  body{background:#fff; color:#111}
+  .card{box-shadow:none}
+  .muted, .kicker{color:#444}
+  .wrap{max-width: 900px}
+}
+
+  </style>
 </head>
-
-<body id="blackGraud">
-
-  <header>
-
-
-    <section>
-      <h2 id="Fire">Pibrm</h2>
-      <img src="img/home/BackHome.png" alt="" id="Homeback">
-      <a href=""><img src="img/home/menu.png" alt="" id="menu"></a>
-      <img src="img/home/PibrmWhite.svg" class="logo">
-      <img class="animate__animated animate__backInDown" id="Hometext1" src="img/home/Amar,acolher e servir.svg"
-        alt="">
-
-      <div class="HomeConteiner">
-
-
-        <div class="card1 animate__animated animate__fadeInDown">
-          <div onclick="myFunction()" class="CardText">
-            <a class="Link" href="Renovo.html">
-
-              <h2>Escola Renovo</h2>
-            </a>
-            <a class="Link" href="Renovo.html">
-              <p>Profundos no Espírito e na Palavra.</p>
-            </a>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1">Discipular</div>
+            <div class="muted" style="font-size:12px">Documento Oficial • v1.0</div>
           </div>
-
-          <div class="card2">
-            <div class="CardText">
-              <a class="Link" href="Devocional.html">
-                <h2>Semana Renovada</h2>
-              </a>
-              <a class="Link" href="Devocional.html">
-                <p>Versão digital do nosso Devocional semanal</p>
-              </a>
-            </div>
-
-            <div class="card3">
-              <div class="CardText">
-                <a class="Link" href="FireEscola.html">
-                  <h2>Sobre Nós</h2>
-                </a>
-                <a class="Link" href="FireEscola.html">
-
-                  <p>Conheça mais sobre a Pibrm</p>
-                </a>
-              </div>
-
-    </section>
-
-
-    <div class="secProg">
-
-
-      <img src="img/home/progback1.png" id="progback">
-      <img data-anime="left" src="img/home/programa.svg" id="Homeprog2">
-
-      <a data-anime="left" class="Homeprogtitle">NOSSAS PROGRAMAÇÕES</a>
-
-    </div>
-
-
-    <div class="secMap">
-
-      <img src="img/home/Visita.png" id="Homemap1">
-
-      <div class="Gmaps">
-        <a href="https://maps.app.goo.gl/kA5wXtP98Lep2ugz7"> <button class="btnmap1">Abrir no Maps</button></a>
-        <span class="slider"> </span>
+        </div>
+        <div class="pill">Formação teológica • Discipulado no lar</div>
       </div>
     </div>
+  </header>  <main class="wrap">
+    <section class="hero" id="topo">
+      <h1>Formação Teológica para <span style="color:var(--brand)">discipulado</span> no lar e na igreja</h1>
+      <p class="sub">Uma plataforma que organiza o estudo das Escrituras de forma progressiva, bíblica e aplicável — para estudo individual, discipulado familiar e acompanhamento um a um.</p><div class="ctaRow">
+    <a class="btn primary" href="#curriculo" aria-label="Ir para a grade curricular">
+      <span aria-hidden="true">📚</span> Ver grade curricular
+    </a>
+    <a class="btn" href="#confissao" aria-label="Ir para confissão teológica">
+      <span aria-hidden="true">📜</span> Ver confissão teológica
+    </a>
+    <a class="btn" href="#modelo" aria-label="Ir para modelo pedagógico">
+      <span aria-hidden="true">🧠</span> Modelo de aula
+    </a>
+  </div>
+</section>
 
-
-    <div class="SecSocial">
-
-      <img src="img/home/socialBack.png" id="Homesoci1">
-      <a href="https://www.facebook.com/igrejabatistarenovadamarialvacentro"><img src="img/home/face.svg"
-          id="Facebook"></a>
-      <a href="https://www.instagram.com/pibrmva/"><img src="img/home/Instagram.svg" id="Instagram"></a>
-      <a href=""><img src="img/home/Youtube.svg" id="Youtube"></a>
-      <h3 data-anime="left" id="socialtext1">Confira mais nas nossas redes sociais</h3>
-
+<section class="grid" aria-label="Seções principais">
+  <article class="card">
+    <div class="hd">
+      <div>
+        <div class="kicker">Identidade</div>
+        <h2>Propósito do Discipular</h2>
+      </div>
     </div>
+    <div class="bd">
+      <p class="muted" style="margin:0">Não é apenas conteúdo: é formação de discípulos com profundidade bíblica, clareza doutrinária e aplicação prática.</p>
+      <ul class="list">
+        <li>A glória de Deus</li>
+        <li>A autoridade das Escrituras</li>
+        <li>A santidade cristã</li>
+        <li>A missão da Igreja</li>
+      </ul>
+    </div>
+  </article>
 
+  <article class="card">
+    <div class="hd">
+      <div>
+        <div class="kicker">Público & Uso</div>
+        <h2>Feito para o dia a dia</h2>
+      </div>
+    </div>
+    <div class="bd">
+      <div class="twoCol">
+        <div class="badge"><span class="dot" aria-hidden="true"></span> Estudo individual</div>
+        <div class="badge"><span class="dot" aria-hidden="true"></span> Discipulado familiar</div>
+        <div class="badge"><span class="dot" aria-hidden="true"></span> Um a um / pequenos grupos</div>
+        <div class="badge"><span class="dot" aria-hidden="true"></span> Formação de discipuladores</div>
+      </div>
+    </div>
+  </article>
 
+  <article class="card span2" id="confissao">
+    <div class="hd">
+      <div>
+        <div class="kicker">Confissão teológica</div>
+        <h2>Arminianismo clássico com sobriedade reformada</h2>
+      </div>
+      <div class="pill">Transparente • interdenominacional</div>
+    </div>
+    <div class="bd">
+      <p class="muted" style="margin-top:0">O Discipular apresenta as principais visões históricas com respeito e responsabilidade, sem ocultar sua confessionalidade e com ênfase contínua nas Escrituras.</p>
 
-  </header>
+      <details open>
+        <summary>
+          <strong>Autoridade das Escrituras</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <ul class="list">
+            <li>Inspiração verbal plenária</li>
+            <li>Inerrância (nos manuscritos originais)</li>
+            <li>Suficiência para fé e prática</li>
+            <li>Autoridade suprema da Palavra de Deus</li>
+          </ul>
+        </div>
+      </details>
 
+      <details>
+        <summary>
+          <strong>Doutrina de Deus</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <ul class="list">
+            <li>Um Deus verdadeiro e soberano</li>
+            <li>Trindade: Pai, Filho e Espírito Santo</li>
+            <li>Providência e governo divino sobre todas as coisas</li>
+            <li>Soberania divina sem anular responsabilidade humana</li>
+          </ul>
+        </div>
+      </details>
 
+      <details>
+        <summary>
+          <strong>Homem, pecado e necessidade da graça</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <ul class="list">
+            <li>Criação à imagem de Deus</li>
+            <li>Queda e corrupção do homem</li>
+            <li>Depravação total (incapacidade moral sem a graça)</li>
+            <li>Necessidade absoluta da ação divina para a salvação</li>
+          </ul>
+        </div>
+      </details>
 
-  <script src="js/script.js"></script>
-  <script src="js/btn.js"></script>
+      <details>
+        <summary>
+          <strong>Salvação (Arminianismo clássico)</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <p class="muted" style="margin-top:0">Afirmamos que Deus soberanamente inicia a salvação e o homem responde pela fé, capacitado pela graça.</p>
+          <ul class="list">
+            <li>Graça preveniente</li>
+            <li>Eleição condicional (presciência divina)</li>
+            <li>Expiação suficiente para todos e eficaz aos que creem</li>
+            <li>Justificação pela fé</li>
+            <li>Santificação progressiva</li>
+            <li>Perseverança mediante permanência na fé</li>
+          </ul>
+        </div>
+      </details>
 
+      <details>
+        <summary>
+          <strong>Igreja e missão</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <ul class="list">
+            <li>Igreja como corpo de Cristo</li>
+            <li>Centralidade da pregação e do discipulado</li>
+            <li>Ordenanças instituídas por Cristo</li>
+            <li>Missão até a volta de Cristo</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <strong>Escatologia (base: pré-milenista pós-tribulacionista)</strong>
+          <span class="chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <div class="bd" style="padding-top:0">
+          <ul class="list">
+            <li>Volta literal e visível de Cristo</li>
+            <li>Perseverança da Igreja durante a tribulação</li>
+            <li>Reino milenar de Cristo</li>
+            <li>Juízo final e restauração de todas as coisas</li>
+          </ul>
+          <p class="muted" style="margin-bottom:0">Outras leituras históricas são apresentadas de forma comparativa e respeitosa.</p>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <article class="card span2" id="curriculo">
+    <div class="hd">
+      <div>
+        <div class="kicker">Grade curricular</div>
+        <h2>Currículo Discipular 1.0</h2>
+      </div>
+      <div class="pill">Progressivo • aplicável</div>
+    </div>
+    <div class="bd">
+      <details open>
+        <summary><strong>Nível 1 — Teologia Sistemática</strong><span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="bd" style="padding-top:0">
+          <ol class="list">
+            <li>Introdução à Teologia</li>
+            <li>Doutrina das Escrituras</li>
+            <li>Doutrina de Deus</li>
+            <li>Doutrina do Homem e do Pecado</li>
+            <li>Cristologia</li>
+            <li>Soteriologia</li>
+            <li>Pneumatologia</li>
+            <li>Eclesiologia</li>
+            <li>Escatologia</li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary><strong>Nível 2 — Teologia Bíblica</strong><span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="bd" style="padding-top:0">
+          <ol class="list">
+            <li>Criação</li>
+            <li>Queda</li>
+            <li>Aliança</li>
+            <li>Reino</li>
+            <li>Cristo</li>
+            <li>Igreja</li>
+            <li>Consumação</li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary><strong>Nível 3 — História da Igreja</strong><span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="bd" style="padding-top:0">
+          <ol class="list">
+            <li>Igreja Primitiva</li>
+            <li>Concílios Cristológicos</li>
+            <li>Idade Média</li>
+            <li>Reforma Protestante</li>
+            <li>Debate Arminius e Reforma</li>
+            <li>Desenvolvimento do Evangelicalismo</li>
+            <li>Igreja Contemporânea</li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary><strong>Nível 4 — Formação para Discipuladores</strong><span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="bd" style="padding-top:0">
+          <ol class="list">
+            <li>Fundamentos do Discipulado Bíblico</li>
+            <li>Discipulado no Lar</li>
+            <li>Formação de Caráter Cristão</li>
+            <li>Ensino Sistemático nas Casas</li>
+            <li>Como Ensinar Teologia para Leigos</li>
+            <li>Formação de Novos Discipuladores</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <article class="card" id="modelo">
+    <div class="hd">
+      <div>
+        <div class="kicker">Modelo pedagógico</div>
+        <h2>Estrutura padrão de aula</h2>
+      </div>
+    </div>
+    <div class="bd">
+      <ol class="list">
+        <li><strong>Texto bíblico base</strong></li>
+        <li><strong>Exposição teológica</strong> (clara e fiel às Escrituras)</li>
+        <li><strong>Comparação de visões</strong> (históricas e respeitosas)</li>
+        <li><strong>Aplicação pessoal</strong> (vida cristã e santidade)</li>
+        <li><strong>Guia para discipulador</strong> (como ensinar e acompanhar)</li>
+        <li><strong>Perguntas para discussão</strong> (casa / grupo / um a um)</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="hd">
+      <div>
+        <div class="kicker">Missão</div>
+        <h2>Declaração de missão</h2>
+      </div>
+    </div>
+    <div class="bd">
+      <p style="margin:0">Formar discípulos maduros por meio do ensino sistemático das Escrituras, capacitando famílias e líderes a discipular com responsabilidade teológica, profundidade bíblica e aplicação prática.</p>
+    </div>
+  </article>
+</section>
+
+<section class="footer">
+  <div class="row" style="align-items:flex-start">
+    <div>
+      <strong style="color:var(--text)">Discipular</strong>
+      <div class="muted">Documento Institucional • versão mobile</div>
+    </div>
+    <a class="btn" href="#topo" style="padding:8px 10px; border-radius:12px">
+      <span aria-hidden="true">⬆️</span> Topo
+    </a>
+  </div>
+  <div style="margin-top:10px">Dica: esta página foi feita para funcionar bem no celular e também imprimir (Menu do navegador → Imprimir → Salvar em PDF).</div>
+</section>
+
+  </main>
 </body>
-
 </html>
